@@ -50,4 +50,19 @@ class MathsTest extends FunSuite {
       getPartitionsOfN(49)
     }
   }
+
+  test("Get square root integer") {
+    assertResult((5, 1)){
+      getSquareRootWholeInteger(26)
+    }
+    assertResult((5, 3)){
+      getSquareRootWholeInteger(28)
+    }
+  }
+
+  test("Get square root integer irrational") {
+    assertResult(475){
+      getSquareRootDecimals(2)._2
+    }
+  }
 }
