@@ -1,44 +1,50 @@
 package in.umlaut.euler
 
-import in.umlaut.utility.Utility
+import in.umlaut.maths.Maths
 
 object IntegerRightTriangles {
 
   /**
+    * Wrapper function to count whatever is needed with the perimeters (max frequency perimeter /
+    * number of perimeters occuring only once/ ...)
     * Returns the perimeter with the highest count of integer right triangles with that perimeter
     * where perimeter is less than equal to maxPerimeter
     * @param maxPerimeter
     * @return
     */
-  def countTriangles(maxPerimeter:Int): (Int, Int) = {
+  def countTriangles(maxPerimeter:Int): Int = {
     val m = math.sqrt(maxPerimeter/2).toInt
-    val triangles = generateTripletsForM(m, maxPerimeter, Set())
-    triangles.groupBy(x => x._1 + x._2 + x._3).mapValues(_.size).maxBy(_._2)
+    val triangles = generateTripletsForM(m, maxPerimeter, Map())
+    triangles.count(_._2 == 1)
   }
 
   /**
-    * Returns all triangles for given m and n with perimeter less than equal to p
+    * Returns the count of triangles against all possible perimeters under the max perimeter of p
     * @param m
     * @param n
     * @param p
-    * @param triangles
+    * @param perimeters
     * @return
     */
-  def getTrianglesForGivenSidesWithMaxPerimeter(m: Int, n:Int, p:Int, triangles: Set[(Int, Int, Int)]): Set[(Int, Int, Int)] = {
-    def countTrianglesForMNKP(m: Int, n:Int, p:Int, k:Int, set: Set[(Int, Int, Int)]):Set[(Int, Int, Int)] = {
-      if((k * 2 * m * (m + n)) <= p){
-        val sides = Utility.sortTriplet(k * ((m * m) + (n * n)), 2 * k * m * n, k * ((m * m) - (n * n)))
-        val newSet = if (set contains sides) set else set + sides
-        countTrianglesForMNKP(m, n, p, k + 1, newSet)
+  def getTrianglesForGivenSidesWithMaxPerimeter(m: Int, n:Int, p:Int, perimeters: Map[Int, Int]): Map[Int, Int] = {
+    def countTrianglesForMNP(m: Int, n:Int, p:Int, k:Int, perimeters: Map[Int, Int]):Map[Int, Int] = {
+      val perimeter = k * 2 * m * (m + n)
+      if(perimeter <= p){
+        if (perimeters isDefinedAt perimeter) {
+          countTrianglesForMNP(m, n, p, k + 1, perimeters.updated(perimeter, perimeters(perimeter) + 1))
+        } else {
+          countTrianglesForMNP(m, n, p, k + 1, perimeters + (perimeter -> 1))
+        }
       } else {
-        set
+        perimeters
       }
     }
-    countTrianglesForMNKP(m, n, p, 1, triangles)
+    countTrianglesForMNP(m, n, p, 1, perimeters)
   }
 
   /**
-    * Returns all triangles for m in the range 1 to m with perimeter less than equal to p
+    * Returns frequency of perimeters of triangles for m in the range 1 to m with perimeter less
+    * than equal to p
     * What is m ?
     * Refer Euler's formula to gerenate Pythagorean Triplets
     * @param m
@@ -46,20 +52,26 @@ object IntegerRightTriangles {
     * @param triangles
     * @return
     */
-  def generateTripletsForM(m:Int, p:Int, triangles: Set[(Int, Int, Int)]):Set[(Int, Int, Int)] = {
+  def generateTripletsForM(m:Int, p:Int, triangles: Map[Int, Int]):Map[Int, Int] = {
+
+    def getPerimetersForGivenMandN(m: Int, n: Int, bound : Int, maxPerimeter:Int, perimeterCounts:Map[Int, Int]): Map[Int, Int] = {
+      if(n <= bound && (2 * m * (m + n) <= p) && (m > n)) {
+        if(((m + n) % 2 > 0) && Maths.isRelativelyCoprime(m,n)) {
+          val updatedCounts = getTrianglesForGivenSidesWithMaxPerimeter(m, n, p, perimeterCounts)
+          getPerimetersForGivenMandN(m, n + 1, bound, maxPerimeter, updatedCounts)
+        } else {
+          getPerimetersForGivenMandN(m, n + 1, bound, maxPerimeter, perimeterCounts)
+        }
+      } else {
+        perimeterCounts
+      }
+    }
     if(m == 1){
       triangles
     } else {
       val upperBound = (p - 2 * (m * m))/m
-      val maps:Set[(Int, Int, Int)] = (1 to upperBound).map(x => {
-        if((2 * m * (m + x) <= p) && (m > x)) {
-          getTrianglesForGivenSidesWithMaxPerimeter(m,x,p, triangles)
-        } else {
-          Set[(Int, Int, Int)]()
-        }
-      }).filter(x => x.nonEmpty).flatten.toSet
-      generateTripletsForM(m-1, p, triangles ++ maps)
+      val countOfPerimeters = getPerimetersForGivenMandN(m,1,upperBound, p, triangles)
+      generateTripletsForM(m-1, p, countOfPerimeters)
     }
   }
-
 }

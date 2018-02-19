@@ -65,7 +65,7 @@ class EulerTest  extends FunSuite with Matchers {
   }
 
   /**
-    * Tests solution of project euler problem 78
+    * Tests solution of project euler problem 89
     */
   test("Should get me the result for RomanNumerals"){
     println(RomanNumeralsShortener.shortenAndCountCharsGained)
@@ -73,10 +73,10 @@ class EulerTest  extends FunSuite with Matchers {
 
 
   /**
-    * Tests solution of project euler problem 39
+    * Tests solution of project euler problem 39 / 75
     */
   test("Should get me the result for Integer RightTriangles"){
-    println(IntegerRightTriangles.countTriangles(1001))
+    println(IntegerRightTriangles.countTriangles(1500000))
   }
 
 }

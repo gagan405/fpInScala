@@ -137,4 +137,15 @@ object Maths {
     }
   }
 
+  def gcd(a:Int, b:Int):Int = {
+    if(b == 0) {
+      a
+    } else {
+      gcd(b, a % b)
+    }
+  }
+
+  def isRelativelyCoprime(a:Int, b:Int):Boolean = {
+    gcd(a,b) == 1
+  }
 }
