@@ -39,4 +39,12 @@ class UtilityTest extends FunSuite with Matchers {
     res should equal (List(1, 4, 7, 2, 5, 3, 6))
   }
 
+  test("Should combine list of Maps to a single map"){
+    val myList =  List(Map(1 -> 1), Map(2 -> 2), Map(2 -> 7))
+    val res = Utility.reduceListOfMapsToMap(myList, (x:Int, y:Int) => {x * y})
+    assert(res.keySet.size == 2)
+    assert(res(1) == 1)
+    assert(res(2) == 14)
+  }
+
 }

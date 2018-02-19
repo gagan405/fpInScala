@@ -33,4 +33,16 @@ object Utility {
     transform(xs).flatten
   }
 
+
+  def reduceListOfMapsToMap[K, V](list: List[Map[K, V]], f:(V, V) => V):Map[K, V] = {
+    list.flatten.groupBy(_._1).mapValues(_.map(_._2).reduceLeft(f))
+  }
+
+
+  def sortTriplet(triplet: (Int, Int, Int)):(Int, Int, Int) = {
+    val high = triplet._1 max triplet._2 max triplet._3
+    val low = triplet._1 min triplet._2 min triplet._3
+    (high, triplet._1 + triplet._2 + triplet._3 - (high + low), low)
+  }
+
 }
