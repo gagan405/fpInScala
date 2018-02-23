@@ -93,4 +93,11 @@ class EulerTest  extends FunSuite with Matchers {
     println(TotientPermutations.getTotientFunctionsWithPermutations(10000000))
   }
 
+  /**
+    * Tests solution of project euler problem 49
+    */
+  test("Should get the prime permutations"){
+    println(PrimePermutations.getPrimePermutations(10000, 4))
+  }
+
 }

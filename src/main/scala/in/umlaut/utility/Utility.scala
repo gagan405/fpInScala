@@ -130,4 +130,18 @@ object Utility {
     x == y
   }
 
+  /**
+    * Creates pairs of elements from a given list
+    * @param series
+    * @tparam A
+    * @return
+    */
+  def uniquePairsOfList[A](series: List[A]):List[(A,A)] = {
+    for {
+      (x, idxX) <- series.zipWithIndex
+      (y, idxY) <- series.zipWithIndex
+      if idxX < idxY
+    } yield (x, y)
+  }
+
 }
