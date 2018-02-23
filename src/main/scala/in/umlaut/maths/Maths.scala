@@ -1,5 +1,7 @@
 package in.umlaut.maths
 
+import scala.collection.mutable.ArrayBuffer
+
 object Maths {
 
   /**
@@ -137,6 +139,12 @@ object Maths {
     }
   }
 
+  /**
+    * Calculates GCD of two integers
+    * @param a
+    * @param b
+    * @return
+    */
   def gcd(a:Int, b:Int):Int = {
     if(b == 0) {
       a
@@ -145,7 +153,62 @@ object Maths {
     }
   }
 
+  /**
+    * Checks if two integers are co-prime to each other
+    * @param a
+    * @param b
+    * @return
+    */
   def isRelativelyCoprime(a:Int, b:Int):Boolean = {
     gcd(a,b) == 1
   }
+
+  /**
+    * Returns positive power of an integer. To accommodate larger integers or powers
+    * chenge to BigInt
+    * @param n
+    * @param p
+    * @return
+    */
+
+  def positivePower(n: Int, p: Int):Int = {
+    List.fill(p)(n) product
+  }
+
+  /**
+    * Returns factorial of an integer
+    * @param n
+    * @return
+    */
+  def factorial(n: Int):Int = {
+    if(n == 0) {
+      1
+    } else {
+      n * factorial(n - 1)
+    }
+  }
+
+  /**
+    * Sieve of Eratosthenes taken from https://gist.github.com/mattfowler/62f1be4fbe6d36c0a9d84c94817389ba
+    * @param n
+    * @return
+    */
+  def getPrimesTillN(n: Int):List[Int] = {
+    val odds = Stream.from(3, 2).takeWhile(_ <= Math.sqrt(n).toInt)
+    val composites = odds.flatMap(i => Stream.from(i * i, 2 * i).takeWhile(_ <= n))
+    2 :: Stream.from(3, 2).takeWhile(_ <= n).diff(composites).toList
+  }
+
+  def calculateTotientFunctionTillN(n:Int):List[Int] = {
+    val phi = ArrayBuffer.tabulate(n)(identity)
+    for(x <- 2 until n){
+      if(phi(x) == x){
+        for (y <- x until n by x){
+          phi(y) = phi(y) / x * (x - 1)
+        }
+      }
+    }
+    phi.toList
+  }
+
 }

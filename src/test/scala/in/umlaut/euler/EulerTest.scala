@@ -79,4 +79,18 @@ class EulerTest  extends FunSuite with Matchers {
     println(IntegerRightTriangles.countTriangles(1500000))
   }
 
+  /**
+    * Tests solution of project euler problem 35
+    */
+  test("Should count the number of circular primes"){
+    println(CircularPrimes.getCircularPrimes(1000000))
+  }
+
+  /**
+    * Tests solution of project euler problem 70
+    */
+  test("Should get the totient functions"){
+    println(TotientPermutations.getTotientFunctionsWithPermutations(10000000))
+  }
+
 }

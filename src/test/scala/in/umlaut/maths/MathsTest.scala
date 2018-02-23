@@ -65,4 +65,14 @@ class MathsTest extends FunSuite {
       getSquareRootDecimals(2)._2
     }
   }
+
+  test("Get prime numbers till n") {
+    val x = getPrimesTillN(1000000)
+    println(x)
+  }
+
+  test("Get totient function till n") {
+    val x = calculateTotientFunctionTillN(1000000)
+    println(x)
+  }
 }

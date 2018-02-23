@@ -1,5 +1,6 @@
 package in.umlaut.utility
 
+import in.umlaut.maths.Maths.getPrimesTillN
 import org.scalatest.{FunSuite, Matchers}
 
 class UtilityTest extends FunSuite with Matchers {
@@ -45,6 +46,16 @@ class UtilityTest extends FunSuite with Matchers {
     assert(res.keySet.size == 2)
     assert(res(1) == 1)
     assert(res(2) == 14)
+  }
+
+  test("Should correctly swap the digits"){
+    val res = Utility.swapDigitsOfNumber(568977, 3, 6)
+    assert(res == 968577)
+  }
+
+  test("Should correctly generate all permutations"){
+    val res = Utility.generatePermutations(321)
+    println(res)
   }
 
 }

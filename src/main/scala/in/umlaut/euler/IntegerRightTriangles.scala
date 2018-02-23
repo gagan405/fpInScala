@@ -55,6 +55,7 @@ object IntegerRightTriangles {
   def generateTripletsForM(m:Int, p:Int, triangles: Map[Int, Int]):Map[Int, Int] = {
 
     def getPerimetersForGivenMandN(m: Int, n: Int, bound : Int, maxPerimeter:Int, perimeterCounts:Map[Int, Int]): Map[Int, Int] = {
+      // to generate primitive triplets m & n have to be relatively co-prime and one of them odd
       if(n <= bound && (2 * m * (m + n) <= p) && (m > n)) {
         if(((m + n) % 2 > 0) && Maths.isRelativelyCoprime(m,n)) {
           val updatedCounts = getTrianglesForGivenSidesWithMaxPerimeter(m, n, p, perimeterCounts)
