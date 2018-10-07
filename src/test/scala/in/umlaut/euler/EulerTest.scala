@@ -100,4 +100,18 @@ class EulerTest  extends FunSuite with Matchers {
     println(PrimePermutations.getPrimePermutations(10000, 4))
   }
 
+
+  /**
+    * Tests solution of project euler problem 38
+    */
+  test("Should get the pandigital number"){
+    println(PanDigital.getPanDigitalNumber())
+  }
+
+  /**
+    * Tests solution of project euler problem 41
+    */
+  test("Should get the pandigital prime number"){
+    println(PanDigital.getLargestPandigitalPrime())
+  }
 }

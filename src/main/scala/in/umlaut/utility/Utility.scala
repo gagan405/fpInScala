@@ -98,8 +98,7 @@ object Utility {
       }
       List.empty ++ soFar
     }
-    val res = generate(n.toString.length, n, mutable.MutableList())
-    res
+    generate(n.toString.length, n, mutable.MutableList())
   }
 
   /**
@@ -143,5 +142,8 @@ object Utility {
       if idxX < idxY
     } yield (x, y)
   }
+
+  def isPanDigitalNumber(n:Int, d:Int = 9):Boolean =
+    isPermutationOf(n, List.tabulate(d)(_ + 1).foldLeft("")((a,b) => a + b.toString).toInt)
 
 }

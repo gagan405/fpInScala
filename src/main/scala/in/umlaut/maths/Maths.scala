@@ -199,6 +199,20 @@ object Maths {
     2 :: Stream.from(3, 2).takeWhile(_ <= n).diff(composites).toList
   }
 
+  def sieveOfEratosthenes(n:Int):List[Int] = {
+    val limit = (n - 1)/2
+    val sqrt = (math.sqrt(n).toInt - 1)/2
+    val primes = ArrayBuffer.tabulate(limit + 1)(_ => true)
+    for(i <- 1 to sqrt){
+      if(primes(i)){
+        for(j <- i * 2 * (i + 1) to limit by (2 * i + 1)){
+          primes(j) = false
+        }
+      }
+    }
+    2::(1 to limit).filter(primes(_)).map(x => 2 * x + 1).toList
+  }
+
   def calculateTotientFunctionTillN(n:Int):List[Int] = {
     val phi = ArrayBuffer.tabulate(n)(identity)
     for(x <- 2 until n){
@@ -211,4 +225,11 @@ object Maths {
     phi.toList
   }
 
+  def countDigits(n:Int):Int = {
+    if(n < 10){
+      1
+    } else {
+      1 + countDigits(n/10)
+    }
+  }
 }

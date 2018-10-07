@@ -1,6 +1,5 @@
 package in.umlaut.utility
 
-import in.umlaut.maths.Maths.getPrimesTillN
 import org.scalatest.{FunSuite, Matchers}
 
 class UtilityTest extends FunSuite with Matchers {

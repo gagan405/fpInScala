@@ -67,12 +67,23 @@ class MathsTest extends FunSuite {
   }
 
   test("Get prime numbers till n") {
-    val x = getPrimesTillN(1000000)
+    val x = getPrimesTillN(7654321)
+    println(x)
+  }
+
+  test("Get prime numbers till n using iteration") {
+    val x = sieveOfEratosthenes(7654321)
     println(x)
   }
 
   test("Get totient function till n") {
     val x = calculateTotientFunctionTillN(1000000)
     println(x)
+  }
+
+  test("Count digits in a number"){
+    assertResult(5){
+      countDigits(12304)
+    }
   }
 }
