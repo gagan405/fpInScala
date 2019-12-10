@@ -57,4 +57,11 @@ class UtilityTest extends FunSuite with Matchers {
     println(res)
   }
 
+  test("Should correctly search items in sorted list") {
+    val list = List(10,11,12,13,14)
+    assert(Utility.binarySearch(list, 11).get == 1)
+    assert(Utility.binarySearch(list, 14).get == 4)
+    assert(Utility.binarySearch(list, 9).isEmpty)
+  }
+
 }

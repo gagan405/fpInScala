@@ -114,4 +114,10 @@ class EulerTest  extends FunSuite with Matchers {
   test("Should get the pandigital prime number"){
     println(PanDigital.getLargestPandigitalPrime())
   }
+
+  test("Should get the max consecutive sum prime") {
+    val start = System.currentTimeMillis()
+    println(Primes.consecutivePrimeSum(1000000))
+    println(System.currentTimeMillis() - start)
+  }
 }

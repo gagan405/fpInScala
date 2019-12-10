@@ -1,6 +1,7 @@
 package in.umlaut.utility
 
 import in.umlaut.maths.Maths._
+import Ordering.Implicits._
 
 import scala.collection.mutable
 
@@ -145,5 +146,29 @@ object Utility {
 
   def isPanDigitalNumber(n:Int, d:Int = 9):Boolean =
     isPermutationOf(n, List.tabulate(d)(_ + 1).foldLeft("")((a,b) => a + b.toString).toInt)
+
+
+  def binarySearch[T: Ordering](series: List[T], item: T):Option[Int] = {
+    def helper[T: Ordering](series: List[T], item: T, start: Int, end: Int):Option[Int] = {
+      if (series(start) > item || series(end) < item) {
+        Option.empty
+      }
+      else if (series(start) == item) {
+        Option(start)
+      } else if (series(end) == item) {
+        Option(end)
+      } else {
+        if (start == end -1) {
+          return Option.empty
+        }
+        if (item < series((start + end) / 2)) {
+          helper(series, item, start, (start + end) / 2)
+        } else {
+          helper(series, item, (start + end) / 2, end)
+        }
+      }
+    }
+    helper(series, item, 0, series.size -1)
+  }
 
 }
