@@ -86,4 +86,20 @@ class MathsTest extends FunSuite {
       countDigits(12304)
     }
   }
+
+  test("Should correctly identify prime number") {
+    assert(isPrime(3))
+    assert(isPrime(73))
+    assert(isPrime(101))
+    assert(!isPrime(30))
+    assert(isPrime(13))
+    assert(!isPrime(455))
+    assert(isPrime(997651))
+  }
+
+  test("Should count digits in power") {
+    assert(countDigitsInPower(2,2) == 1)
+    assert(countDigitsInPower(5,6) == 5)
+  }
+
 }

@@ -105,14 +105,14 @@ class EulerTest  extends FunSuite with Matchers {
     * Tests solution of project euler problem 38
     */
   test("Should get the pandigital number"){
-    println(PanDigital.getPanDigitalNumber())
+    println(Digits.getPanDigitalNumber())
   }
 
   /**
     * Tests solution of project euler problem 41
     */
   test("Should get the pandigital prime number"){
-    println(PanDigital.getLargestPandigitalPrime())
+    println(Digits.getLargestPandigitalPrime())
   }
 
   test("Should get the max consecutive sum prime") {
@@ -120,4 +120,13 @@ class EulerTest  extends FunSuite with Matchers {
     println(Primes.consecutivePrimeSum(1000000))
     println(System.currentTimeMillis() - start)
   }
+
+  test("Should count the primes in spiral") {
+    println(Primes.spiralPrimes(10))
+  }
+
+  test("Should count n-digit nth power numbers") {
+    println(Digits.countNDigitNumbersWhichAreAlsoNthPowers())
+  }
+
 }

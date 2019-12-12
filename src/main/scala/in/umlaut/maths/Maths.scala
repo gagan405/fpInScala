@@ -79,7 +79,7 @@ object Maths {
   }
 
   /**
-    * Retuns the square of an integer
+    * Returns the square root of an integer
     * returns only the integer value and not any decimal portion
     * i.e., for input 26, output would be 5
     * @param n
@@ -232,4 +232,36 @@ object Maths {
       1 + countDigits(n/10)
     }
   }
+
+  def countDigitsInPower(x: Int, y: Int): Int = {
+    (1 + y * Math.log10(x)).toInt
+  }
+
+  /**
+    * Checks if an integer is prime or not
+    * @param n
+    * @return
+    */
+  def isPrime(n:Int): Boolean = {
+    if (n <= 1) {
+      false
+    }
+
+    else if (n <= 3) {
+      true
+    }
+
+    else if (n % 2 == 0 || n % 3 == 0) {
+      false
+    }
+
+    else {
+      val sqrt = Math.sqrt(n).toInt
+      val res = (for (i <- 5 to sqrt by 6
+                    if (n % i == 0 || n % (i + 2) == 0) ) yield false).headOption
+
+      res.isEmpty
+    }
+  }
+
 }
