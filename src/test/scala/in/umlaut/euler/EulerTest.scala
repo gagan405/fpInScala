@@ -129,4 +129,16 @@ class EulerTest  extends FunSuite with Matchers {
     println(Digits.countNDigitNumbersWhichAreAlsoNthPowers())
   }
 
+  test("Should get maximum digital sum") {
+    println(Digits.numberWithHighestSumOfDigits())
+  }
+
+  test("Should get last 10 digits of NonMarsenne prime") {
+    println(Digits.lastTenDigitsOfNonMersennePrime())
+  }
+
+  test("Concealed square") {
+    println(Digits.concealedSquare())
+  }
+
 }

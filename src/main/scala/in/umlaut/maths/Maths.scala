@@ -225,6 +225,14 @@ object Maths {
     phi.toList
   }
 
+  def getSumOfDigits(n: BigInt): Int = {
+    if (n == 0) {
+      0
+    } else {
+      (n % 10 + getSumOfDigits(n / 10)).toInt
+    }
+  }
+
   def countDigits(n:Int):Int = {
     if(n < 10){
       1
@@ -235,6 +243,31 @@ object Maths {
 
   def countDigitsInPower(x: Int, y: Int): Int = {
     (1 + y * Math.log10(x)).toInt
+  }
+
+  def getLastNDigitsOfPower(a: Int, b: Int, n: Int): BigInt = {
+    var x = 1
+    var power = 1
+    var d = BigInt(1)
+    val q = BigInt(10).pow(n)
+
+    while (x < n) {
+      d = BigInt(a).pow(power) % q
+      x = countDigits(d.toInt)
+      if (x < n) {
+        power += 1
+      }
+    }
+
+    val t = b / power
+    val r = b % power
+    var dd = d
+
+    for (i <- 2 to t) {
+      dd = (dd * BigInt(a).pow(power)) % q
+    }
+
+    (dd * BigInt(a).pow(r)) % q
   }
 
   /**

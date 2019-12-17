@@ -4,6 +4,8 @@ import in.umlaut.maths.Maths
 import in.umlaut.maths.Maths._
 import in.umlaut.utility.Utility._
 
+import util.control.Breaks._
+
 object Digits {
 
   def getPanDigitalNumber():Int = {
@@ -20,7 +22,9 @@ object Digits {
 
 
   def getLargestPandigitalPrime():Int = {
-    sieveOfEratosthenes(7654321).filter(_ > 1000000).filter(i => isPanDigitalNumber(i, countDigits(i))) max
+    sieveOfEratosthenes(7654321)
+      .filter(_ > 1000000)
+      .filter(i => isPanDigitalNumber(i, countDigits(i))) max
   }
 
   /**
@@ -45,6 +49,62 @@ object Digits {
       m = 1
     }
     count
+  }
+
+  /**
+    * Project euler problem 56
+    * @return
+    */
+  def numberWithHighestSumOfDigits(): Int = {
+    var max = 0
+
+    for (a <- 1 until 100) {
+      for (b <- 1 until 100) {
+        val x = BigInt(a).pow(b)
+        val y = Maths.getSumOfDigits(x)
+        if( y > max ) {
+          max = y
+        }
+      }
+    }
+    max
+  }
+
+
+  /**
+    * Project Euler problem 97
+    * @return
+    */
+  def lastTenDigitsOfNonMersennePrime(): BigInt = {
+    val digits = Maths.getLastNDigitsOfPower(2, 7830457, 10)
+    val q = BigInt(10).pow(10)
+    (BigInt(28433) * digits + 1) % q
+  }
+
+  /**
+    * Project euler problem 206
+    * @return
+    */
+
+  def concealedSquare(): Long = {
+    val min = 101010102L
+    val max = 138902662L
+
+    var res = 1L
+
+    breakable {
+      for (x <- min to max) {
+        if (x % 10 == 3 || x % 10 == 7) {
+          val z = BigInt(x).pow(2).toString
+          if (z.matches("1[0-9]2[0-9]3[0-9]4[0-9]5[0-9]6[0-9]7[0-9]8[0-9]9")) {
+            res = x.toLong
+            break
+          }
+        }
+      }
+    }
+
+    res * 10
   }
 
 }

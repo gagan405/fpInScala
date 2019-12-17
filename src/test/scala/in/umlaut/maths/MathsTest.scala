@@ -102,4 +102,16 @@ class MathsTest extends FunSuite {
     assert(countDigitsInPower(5,6) == 5)
   }
 
+  test("Should get the sum of digits in a number") {
+    assert(getSumOfDigits(26) == 8)
+    assert(getSumOfDigits(25668001) == 28)
+    assert(getSumOfDigits(100) == 1)
+  }
+
+  test("Should get the last N digits in power") {
+    assert(getLastNDigitsOfPower(2, 36, 3) == 736)
+    assert(getLastNDigitsOfPower(3, 58, 6) == 603689)
+    println(getLastNDigitsOfPower(2, 7830457, 10))
+  }
+
 }
