@@ -233,6 +233,26 @@ object Maths {
     }
   }
 
+
+  def precomputeGcd(limit: Int): Array[Array[Int]] = {
+    val gcds = Array.ofDim[Int](limit, limit)
+    for (i <- 0 until limit) {
+      for (j <- 0 until limit) {
+        gcds(i)(j) = Maths.gcd(i, j)
+      }
+    }
+    gcds
+  }
+
+
+  def precomputeSquares(limit: Int): Array[Boolean] = {
+    val res = Array.ofDim[Boolean]((limit + 1) * (limit + 1) * 4)
+    for(i <- 1 to limit * 2) {
+      res(i * i) = true
+    }
+    res
+  }
+
   def countDigits(n:Int):Int = {
     if(n < 10){
       1

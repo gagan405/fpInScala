@@ -2,6 +2,9 @@ package in.umlaut;
 
 import in.umlaut.maths.Maths;
 
+/**
+ * Solves project euler problem 504
+ */
 public class PicksTheorem {
 
     private static int limit = 101;

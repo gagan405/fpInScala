@@ -141,4 +141,10 @@ class EulerTest  extends FunSuite with Matchers {
     println(Digits.concealedSquare())
   }
 
+  test("Should get the number of quadrilaters with square number of lattice points") {
+    val start = System.currentTimeMillis()
+    println(Lattice.countQuadrilateralsWithSquareNumberOfLatticePoints(100))
+    println(System.currentTimeMillis() - start)
+  }
+
 }
