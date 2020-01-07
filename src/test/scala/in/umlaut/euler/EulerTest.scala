@@ -1,5 +1,6 @@
 package in.umlaut.euler
 
+import in.umlaut.maths.{Maths, ModCache}
 import org.scalatest.{FunSuite, Matchers}
 
 class EulerTest  extends FunSuite with Matchers {
@@ -181,5 +182,52 @@ class EulerTest  extends FunSuite with Matchers {
     res = HungarianMax.hungarianMax(mat)
     println("Solution: " + res)
   }
+
+
+  test("Sum of digit sums") {
+    val mod = 1000000007
+    //val x1 = Digits.sumOfDigitSumsV1(228)
+    /*Digits.sumOfDigitSums(18)
+    println("-----------------------")
+    Digits.sumOfDigitSums(27)*/
+
+    // 610, 377, 4999533
+
+    /*for (i <- 1 to 400) {
+      println("Computing for: " + i)
+      val x = Digits.sumOfDigitSumsV1(i) % mod
+      val y = Digits.sumOfDigitSumsV2(i, 20, 1074, mod, new ModCache(mod))
+      assert(y == x)
+      if (i == 377) {
+        println(x)
+      }
+    }*/
+
+    //val x = Digits.sumOfDigitSumsV1(610) % mod
+    val y = Digits.sumOfDigitSumsV2(5702887, 3524578, 593059951, mod, new ModCache(mod))
+    //assert(y == x)
+  }
+
+  test("Sum of digit sums modulo N") {
+    println(Digits.sumOfDigitSumsModulo(90))
+  }
+
+  test("compare v0 and v1") {
+    val mod = 1000000007
+    val x = Digits.sumOfDigitSums(25)
+    val y = Digits.sumOfDigitSumsV1(25, mod)
+    val z = Digits.sumOfDigitSumsV2(25, 13, 181, mod, new ModCache(mod))
+    assert(x == y)
+    assert(x == z)
+
+    for (i <- 1 to 20) {
+      val x = Digits.sumOfDigitSums(i)
+      val y = Digits.sumOfDigitSumsV1(i, mod)
+      assert(x == y)
+    }
+
+  }
+
+
 
   }

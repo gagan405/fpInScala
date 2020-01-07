@@ -114,4 +114,15 @@ class MathsTest extends FunSuite {
     println(getLastNDigitsOfPower(2, 7830457, 10))
   }
 
+  test("Test range sum") {
+    assert(sumRange(1, 10) == 55)
+  }
+
+  test("test modInverse") {
+    assert(modInverse(3, 11) == 4)
+    assert(modInverse(27, 392) == 363)
+
+    println(modInverse(9, 1000000007))
+  }
+
 }

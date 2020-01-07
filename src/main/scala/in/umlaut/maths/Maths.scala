@@ -175,6 +175,14 @@ object Maths {
     List.fill(p)(n) product
   }
 
+  def positivePowerL(n: Int, p: Int):Long = {
+    List.fill(p)(n.toLong) product
+  }
+
+  def tenthPower(p: Int): BigInt = {
+    BigInt("1" + "0" * p)
+  }
+
   /**
     * Returns factorial of an integer
     * @param n
@@ -315,6 +323,49 @@ object Maths {
 
       res.isEmpty
     }
+  }
+
+  def getQuotientAndReminder(x: Long, y: Long): (Long, Long) = {
+    (x / y, x % y)
+  }
+
+  def sumRange(from: Long, to: Long): Long = {
+    sumAP(from, 1L, to - from + 1)
+  }
+
+  def sumAP(a: Long, d: Long, n: Long): Long = {
+    n * ((2 * a) + (n - 1) * d) / 2
+  }
+
+  /**
+   * Implements https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm
+   * @param a
+   * @param m
+   * @return
+   */
+  def modInverse(a: Long, m: Long): Long = {
+    var m0 = m
+    var a0 = a
+    var y = 0L
+    var x = 1L
+
+    while (a0 > 1) {
+      val (q, r) = getQuotientAndReminder(a0, m0)
+      var t = m0
+
+      m0 = r
+      a0 = t
+      t = y
+
+      y = x - q * y
+      x = t
+    }
+
+    if (x < 0) {
+      x += m
+    }
+
+    x
   }
 
 }
