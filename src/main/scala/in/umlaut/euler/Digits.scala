@@ -230,4 +230,34 @@ object Digits {
     sum
   }
 
+
+  /**
+   * Problem 686 project euler
+   */
+  def higherDigitsOfPowerOfTwo(): Int = {
+    var count = 323124
+    var power = 91886591
+
+    val k = 3
+    val min = Math.log10(123)
+    val max = Math.log10(124)
+
+    // BigDecimals are really slow. Better to use double maybe.. even simple brute force will be
+    // faster than this
+    val log2 = BigDecimal(Math.log10(2))
+
+    // we dont have to check for each power. There is a pattern in the powers:
+    // powers diff by either of the three values in {196,289,485}.
+    while (count < 678910) {
+      power += 1
+      val product = power * log2
+      val p = product.remainder(1) + k - 1
+
+      if ((p >= min) && (p < max)) {
+        count += 1
+      }
+    }
+    power
+  }
+
 }
